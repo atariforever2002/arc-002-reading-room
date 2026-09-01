@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ARC-002 | The Reading Room</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #17324a 0%, #0c1722 42%, #05090d 100%);
+      color: #f4f4f4;
+      text-align: center;
+    }
+
+    .room {
+      width: 92%;
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 20px 60px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 64px);
+      letter-spacing: 3px;
+      color: #ffd166;
+    }
+
+    h2 {
+      margin: 8px 0 4px;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: normal;
+      color: #ffffff;
+    }
+
+    .project {
+      margin: 0 0 35px;
+      color: #9ecae1;
+      font-size: 18px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    a.button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 105px;
+      padding: 18px;
+      border: 2px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      text-decoration: none;
+      font-size: clamp(19px, 3vw, 27px);
+      font-weight: bold;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    }
+
+    a.button:active {
+      transform: scale(0.98);
+      background: rgba(255,209,102,0.18);
+    }
+
+    .chatgpt {
+      grid-column: 1 / -1;
+      border-color: #ffd166 !important;
+      background: rgba(255,209,102,0.12) !important;
+    }
+
+    .footer {
+      margin-top: 38px;
+      font-size: 15px;
+      color: #8496a5;
+    }
+
+    @media (max-width: 650px) {
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .chatgpt {
+        grid-column: auto;
+      }
+
+      a.button {
+        min-height: 90px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="room">
+
+    <h1>THE READING ROOM</h1>
+    <h2>Arcade History at Your Fingertips</h2>
+    <p class="project">ARC-002 • Arcade Periodicals Library</p>
+
+    <div class="buttons">
+
+      <a class="button chatgpt"
+         href="https://chatgpt.com/"
+         target="_blank">
+        🎙️ ASK CHATGPT
+      </a>
+
+      <a class="button"
+         href="https://elibrary.arcade-museum.com/"
+         target="_blank">
+        🕹️ ARCADE MUSEUM eLIBRARY
+      </a>
+
+      <a class="button"
+         href="https://archive.gamehistory.org/"
+         target="_blank">
+        📚 VIDEO GAME HISTORY FOUNDATION
+      </a>
+
+      <a class="button"
+         href="https://archive.org/"
+         target="_blank">
+        🏛️ INTERNET ARCHIVE
+      </a>
+
+      <a class="button"
+         href="https://www.worldradiohistory.com/"
+         target="_blank">
+        📻 WORLD RADIO HISTORY
+      </a>
+
+      <a class="button"
+         href="https://www.retromags.com/"
+         target="_blank">
+        📰 RETROMAGS
+      </a>
+
+    </div>
+
+    <div class="footer">
+      Second Life Arcade • ARC-002
+    </div>
+
+  </main>
+
+</body>
+</html>
