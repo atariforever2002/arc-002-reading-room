@@ -3,134 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ARC-002 | The Reading Room</title>
-
-<style>
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background: radial-gradient(circle at top, #17324a 0%, #0c1722 42%, #05090d 100%);
-    color: #f4f4f4;
-    text-align: center;
-}
-
-.room {
-    width: 92%;
-    max-width: 900px;
-    margin: auto;
-    padding: 45px 20px 60px;
-}
-
-h1 {
-    margin: 0;
-    font-size: clamp(34px, 6vw, 64px);
-    letter-spacing: 3px;
-    color: #ffd166;
-}
-
-h2 {
-    margin: 8px 0 4px;
-    font-size: clamp(22px, 4vw, 34px);
-    font-weight: normal;
-}
-
-.project {
-    margin: 0 0 35px;
-    color: #9ecae1;
-    font-size: 18px;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-}
-
-.button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 105px;
-    padding: 18px;
-    border: 2px solid rgba(255,255,255,0.16);
-    border-radius: 18px;
-    background: rgba(255,255,255,0.08);
-    color: white;
-    text-decoration: none;
-    font-size: clamp(19px, 3vw, 27px);
-    font-weight: bold;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
-}
-
-.button:active {
-    transform: scale(0.98);
-}
-
-.chatgpt {
-    grid-column: 1 / -1;
-    border-color: #ffd166;
-    background: rgba(255,209,102,0.12);
-}
-
-.footer {
-    margin-top: 38px;
-    font-size: 15px;
-    color: #8496a5;
-}
-
-@media (max-width: 650px) {
-    .buttons { grid-template-columns: 1fr; }
-    .chatgpt { grid-column: auto; }
-    .button { min-height: 90px; }
-}
-</style>
+<title>The Reading Room | Arcade Obscura</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+<main class="wrap">
 
-<main class="room">
-
+<div class="umbrella"><strong>ARCADE OBSCURA</strong> PRESENTS</div>
+<div class="preview">ARC-002 • ARCADE OBSCURA READING ROOM</div>
 <h1>THE READING ROOM</h1>
-<h2>Arcade History at Your Fingertips</h2>
-<p class="project">ARC-002 • Arcade Periodicals Library</p>
+<div class="intro">An Arcade Obscura project devoted to arcade magazines, periodicals, and retrospective reading.</div>
+<div class="rule">A curated library built around the best available reading source for each publication, with arcade history first and easy browsing across phones, tablets, and desktops.</div>
 
-<div class="buttons">
+<div class="section-title">FEATURED COMPLETE RUN</div>
+<section class="feature">
+<div class="feature-head">
+<strong>TOP SCORE</strong>
+<span>Amusement Players Association • Complete original five-issue run</span>
+</div>
+<div class="issue-grid">
+<a class="issue" href="https://archive.org/details/top_score_newsletter_001" target="_blank" rel="noopener"><span class="num">ISSUE 1</span><span class="date"><span class="date-full">Fall<br>1986</span><span class="date-short">Fall '86</span></span><span class="read">READ →</span></a>
+<a class="issue" href="https://archive.org/details/1987WinterTopScore" target="_blank" rel="noopener"><span class="num">ISSUE 2</span><span class="date"><span class="date-full">Winter<br>1987</span><span class="date-short">Winter '87</span></span><span class="read">READ →</span></a>
+<a class="issue" href="https://www.videoparadise-sanjose.com/ts-3.htm" target="_blank" rel="noopener"><span class="num">ISSUE 3</span><span class="date"><span class="date-full">July / August<br>1987</span><span class="date-short">Jul/Aug '87</span></span><span class="read">READ →</span></a>
+<a class="issue" href="https://archive.org/details/198710TopScore" target="_blank" rel="noopener"><span class="num">ISSUE 4</span><span class="date"><span class="date-full">September / October<br>1987</span><span class="date-short">Sep/Oct '87</span></span><span class="read">READ →</span></a>
+<a class="issue" href="https://www.retromags.com/magazines/usa/top-score/top-score-issue-5/" target="_blank" rel="noopener"><span class="num">ISSUE 5</span><span class="date"><span class="date-full">November / December<br>1987</span><span class="date-short">Nov/Dec '87</span></span><span class="read">READ →</span></a>
+</div>
+</section>
 
-<a class="button chatgpt" href="https://chatgpt.com/">
-🎙️ ASK CHATGPT
-</a>
-
-<a class="button" href="https://elibrary.arcade-museum.com/">
-🕹️ ARCADE MUSEUM eLIBRARY
-</a>
-
-<a class="button" href="https://archive.gamehistory.org/">
-📚 VIDEO GAME HISTORY FOUNDATION
-</a>
-
-<a class="button" href="https://archive.org/">
-🏛️ INTERNET ARCHIVE
-</a>
-
-<a class="button" href="https://www.worldradiohistory.com/">
-📻 WORLD RADIO HISTORY
-</a>
-
-<a class="button" href="https://www.retromags.com/">
-📰 RETROMAGS
-</a>
-
+<div class="section-title">CORE ARCADE / ARCADE-ERA READING</div>
+<div class="grid">
+<a class="card" href="https://elibrary.arcade-museum.com/Play-Meter" target="_blank" rel="noopener"><span class="name">Play Meter</span><span class="note">Coin-op trade coverage: operators, manufacturers, new games, shows, advertising, and industry news.</span><span class="source">International Arcade Museum</span></a>
+<a class="card" href="https://archive.gamehistory.org/folder/14c6f023-c9dd-4ac8-ac7b-f243dc1dbe8f?sortDir=asc&amp;sortField=date" target="_blank" rel="noopener"><span class="name">Arcade Express / Electronic Games Hotline</span><span class="note">Fast-moving 1982–1984 game news with especially strong value for the classic arcade period.</span><span class="source">Video Game History Foundation</span></a>
+<a class="card" href="https://archive.gamehistory.org/folder/39b2d5c8-8756-471f-af66-2e95396f2704?sortDir=asc&amp;sortField=date" target="_blank" rel="noopener"><span class="name">Electronic Games / Computer Entertainment</span><span class="note">Major early videogame run with substantial arcade-era reporting alongside home-game coverage.</span><span class="source">Video Game History Foundation</span></a>
+<a class="card" href="https://www.ataricompendium.com/archives/magazines/joystik/joystik.html" target="_blank" rel="noopener"><span class="name">JoyStik</span><span class="note">Short, arcade-heavy run presented as a simple chronological cover shelf.</span><span class="source">Atari Compendium</span></a>
+<a class="card" href="https://www.ataricompendium.com/archives/magazines/video_games/video_games.html" target="_blank" rel="noopener"><span class="name">Video Games</span><span class="note">Clean chronological run covering the heart of the early-1980s videogame era.</span><span class="source">Atari Compendium</span></a>
+<a class="card" href="https://www.ataricompendium.com/archives/magazines/vgp/vgp.html" target="_blank" rel="noopener"><span class="name">Video Games Player / Computer Games</span><span class="note">Complete short run with the title transition preserved on one easy issue shelf.</span><span class="source">Atari Compendium</span></a>
+<a class="card" href="https://www.ataricompendium.com/archives/magazines/electronic_fun/electronic_fun.html" target="_blank" rel="noopener"><span class="name">Electronic Fun / ComputerFun</span><span class="note">Chronological complete run, including the final ComputerFun issues.</span><span class="source">Atari Compendium</span></a>
+<a class="card" href="https://archive.gamehistory.org/folder/db7773e7-2f43-4581-8d57-0ec83281ed8b?sortDir=asc&amp;sortField=date" target="_blank" rel="noopener"><span class="name">Blip</span><span class="note">Complete seven-issue 1983 run in a direct VGHF digital folder.</span><span class="source">Video Game History Foundation</span></a>
 </div>
 
-<div class="footer">
-Second Life Arcade • ARC-002
+<div class="section-title">BROADER PERIOD READING</div>
+<div class="grid">
+<button class="card shelf-launch" type="button" data-shelf="cvg"><span class="name">UK — Computer &amp; Video Games (CVG)</span><span class="note">Mixed arcade, computer, and console coverage. Opens our clean chronological issue shelf instead of the Internet Archive collection interface.</span><span class="source">Reading Room issue shelf • scans at Internet Archive</span></button>
+<button class="card shelf-launch" type="button" data-shelf="tgm"><span class="name">UK — The Games Machine</span><span class="note">Broad late-1980s games coverage. Opens our clean chronological issue shelf over the Internet Archive scans.</span><span class="source">Reading Room issue shelf • scans at Internet Archive</span></button>
 </div>
 
+<div class="section-title">MODERN RETRO / RETROSPECTIVE READING</div>
+<div class="grid">
+<div class="card card-shell">
+  <span class="name">Old School Gamer</span>
+  <span class="note">Modern retro-gaming magazine with substantial arcade-history, collecting, developer, console, computing, and preservation coverage. The publisher's own free reader is the main reading route. Most issues work well; a few older issues can misbehave on some mobile browsers (Issue #21 is a confirmed example).</span>
+  <span class="source">Official OSG reader • VGHF retained for research/catalog reference</span>
+  <div class="actions">
+    <a class="action" href="https://www.oldschoolgamermagazine.com/magazine-free" target="_blank" rel="noopener">BROWSE FREE OSG ISSUES →</a>
+    <a class="action" href="https://library.gamehistory.org/repositories/2/resources/62" target="_blank" rel="noopener">VGHF RESEARCH CATALOG →</a>
+  </div>
+</div>
+<div class="card card-shell">
+  <span class="name">Retro Gamer — Book of Arcade Classics</span>
+  <span class="note">Arcade-focused Retro Gamer bookazine series. A publisher-hosted free edition is available; additional editions remain listed through the commercial series catalog.</span>
+  <span class="source">Future / GamesRadar + Pocketmags</span>
+  <div class="actions">
+    <a class="action" href="https://dl.gamesradar.com/bookazine_pdfs/MCB1472.ebook_retro_gamer_arcade_classics.pdf" target="_blank" rel="noopener">FREE OFFICIAL EDITION →</a>
+    <a class="action" href="https://pocketmags.com/us/gaming-bookazine-magazine/issues" target="_blank" rel="noopener">BROWSE COMMERCIAL SERIES →</a>
+  </div>
+</div>
+</div>
+
+<details class="collapsible" id="rare" open>
+<summary>RARE / RESEARCH HOLDINGS</summary>
+<div class="inside">
+<section class="research-box">
+<p class="research-copy">Useful historical material that is incomplete, less convenient for casual reading, or primarily valuable as a research source.</p>
+<div class="grid">
+<button class="card shelf-launch" type="button" data-shelf="arcadeee"><span class="name">Arcade / Electronic Entertainment</span><span class="note">Opens our custom surviving / located issues page. The known public run remains incomplete, and the issue status is shown honestly.</span><span class="source">Reading Room holdings page • VGHF catalog</span></button>
+</div>
+</section>
+</div>
+</details>
+
+<details class="collapsible" id="international" open>
+<summary>INTERNATIONAL / RESEARCH SHELF</summary>
+<div class="inside">
+<section class="research-box">
+<p class="research-copy">Japanese-language sources remain valuable for arcade-history research even when they are not everyday casual reading. Ask Nora can use them for games, companies, screenshots, advertisements, and period evidence.</p>
+<div class="grid">
+<button class="card shelf-launch" type="button" data-shelf="gamest"><span class="name">JAPAN — GAMeST</span><span class="note">Arcade-specialist magazine with very high research value. Opens a clean Reading Room issue shelf.</span><span class="source">Reading Room issue shelf • scans at Internet Archive</span></button>
+<button class="card shelf-launch" type="button" data-shelf="arcadia"><span class="name">JAPAN — Arcadia</span><span class="note">Later Japanese arcade-specialist publication and successor-era research source. Opens a clean Reading Room issue shelf.</span><span class="source">Reading Room issue shelf • scans at Internet Archive</span></button>
+<button class="card shelf-launch" type="button" data-shelf="beep"><span class="name">JAPAN — Beep!</span><span class="note">Broader Japanese videogame coverage retained mainly for research. Opens a filtered Reading Room issue shelf rather than the raw warehouse search.</span><span class="source">Reading Room issue shelf • scans at Internet Archive</span></button>
+</div>
+</section>
+</div>
+</details>
+
+<div class="utility">
+<a href="https://archive.gamehistory.org/folder/9a193e8c-67e0-45ff-98d2-a33e85721cc4" target="_blank" rel="noopener">BROWSE VGHF MAGAZINE LIBRARY<small>Full preservation library when you want to go beyond the curated shelf.</small></a>
+<a href="https://archive.org/details/videogamemagazines?sort=date" target="_blank" rel="noopener">BROWSE INTERNET ARCHIVE WAREHOUSE<small>Broad fallback source for magazine runs, individual issues, and material missing elsewhere. This raw warehouse is intentionally unfiltered.</small></a>
+<a class="wide" href="https://flyers.arcade-museum.com/arcades/gallery/new" target="_blank" rel="noopener">ARCADE FLYER ARCHIVE — TAFA<small>Open directly in TAFA’s visual Arcade Flyers Gallery for original flyers, brochures, sell sheets, cabinet artwork, screenshots, and other promotional material.</small></a>
+</div>
+
+<div class="rights-notice"><strong>RIGHTS &amp; REMOVAL NOTICE</strong><br>Arcade Obscura preserves and provides access to historical magazine material for research, preservation, and educational use. Some material may remain protected by copyright, and unless otherwise stated Arcade Obscura does not claim ownership of, or a legal agreement authorizing redistribution of, third-party publications. Rights holders may contact Arcade Obscura to request attribution, correction, restriction, or removal of material.</div>
+
+<div class="foot">Arcade Obscura • The Reading Room • ARC-002</div>
 </main>
 
+<div class="modal" id="shelfModal" aria-hidden="true">
+  <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div class="modal-topline">
+        <div>
+          <h2 class="modal-title" id="modalTitle">Issue Shelf</h2>
+          <div class="modal-sub" id="modalSub"></div>
+        </div>
+        <button type="button" class="modal-close" id="modalClose" aria-label="Close issue shelf">CLOSE</button>
+      </div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </section>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
