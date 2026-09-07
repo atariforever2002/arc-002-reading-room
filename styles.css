@@ -40,9 +40,15 @@ button.card{cursor:pointer}
 .utility a{display:block;padding:17px;text-align:center;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(255,255,255,.055);color:#fff;text-decoration:none;font-weight:800;font-size:17px}
 .utility small{display:block;margin-top:5px;color:#a9c3d4;font-size:11.5px;font-weight:400;line-height:1.35}
 .utility .wide{grid-column:1/-1}
-.foot{text-align:center;margin-top:26px;color:#7f94a4;font-size:12px;line-height:1.35}
+.footer-row{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-top:26px}
+.foot{text-align:left;margin-top:0;color:#7f94a4;font-size:12px;line-height:1.35}
+.site-counter{flex:0 0 auto;text-align:right;font:800 9px Arial,Helvetica,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7f94a4}
+.site-counter .counter-label{margin-bottom:5px}
+.site-counter img{display:block;margin-left:auto;border:1px solid #303944;box-shadow:0 4px 12px rgba(0,0,0,.28);max-width:100%}
 .rights-notice{margin-top:24px;padding:15px 17px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.035);color:#9fb5c4;font-size:11.5px;line-height:1.55}
 .rights-notice strong{color:#d9e6ee}
+
+/* Reading Room issue-shelf overlay */
 .modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(2,6,10,.88);padding:18px;align-items:center;justify-content:center}
 .modal.open{display:flex}
 .modal-panel{width:min(96vw,980px);max-height:91vh;overflow:auto;background:#0b1721;border:1px solid rgba(255,255,255,.2);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
@@ -74,6 +80,67 @@ button.card{cursor:pointer}
 .static-item strong{display:block;font-size:13px;line-height:1.25}
 .static-item .status{display:inline-block;margin-top:6px;color:#e7c66f;font-size:9.5px;font-weight:800;letter-spacing:.5px}
 .static-item .meta{display:block;margin-top:4px;color:#a9c3d4;font-size:10.5px;line-height:1.25}
-@media (hover:hover) and (pointer:fine){.card:hover{border-color:#ffd166;background:rgba(255,209,102,.12)}.issue:hover{border-color:#ffd166;background:rgba(255,209,102,.16)}.action:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}.utility a:hover{border-color:#ffd166;background:rgba(255,209,102,.09)}.shelf-item:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}.cover-item:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}.modal-actions a:hover,.modal-close:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}}
+
+@media (hover:hover) and (pointer:fine){
+  .card:hover{border-color:#ffd166;background:rgba(255,209,102,.12)}
+  .issue:hover{border-color:#ffd166;background:rgba(255,209,102,.16)}
+  .action:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}
+  .utility a:hover{border-color:#ffd166;background:rgba(255,209,102,.09)}
+  .shelf-item:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}
+  .cover-item:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}
+  .modal-actions a:hover,.modal-close:hover{border-color:#ffd166;background:rgba(255,209,102,.10)}
+}
 @media(max-width:760px){.issue-grid{grid-template-columns:repeat(3,1fr)}.shelf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:650px){.wrap{width:min(94%,1000px);padding:17px 14px 42px}.umbrella{font-size:9px;letter-spacing:1.6px;margin-bottom:6px}.preview{font-size:10px;margin-bottom:7px}h1{font-size:clamp(27px,9.5vw,42px);letter-spacing:1px}.intro{font-size:15px;line-height:1.36;margin-top:9px}.rule{font-size:12px;line-height:1.35;margin-bottom:18px}.section-title{margin-top:22px;font-size:16px}.grid,.utility{grid-template-columns:1fr;gap:9px}.card{min-height:70px;padding:12px 14px;border-radius:14px}.name{font-size:20px}.note{font-size:12.5px;line-height:1.32}.source{font-size:9px;margin-top:5px}.feature{padding:12px;border-radius:16px}.feature-head{margin-bottom:9px}.feature-head strong{font-size:25px}.feature-head span{font-size:12px}.issue-grid{grid-template-columns:repeat(3,1fr);gap:6px}.issue{min-height:72px;padding:8px 5px;border-radius:10px}.issue .num{font-size:9px}.issue .date{font-size:12px}.issue .read{font-size:9px;margin-top:4px}.date-full{display:none}.date-short{display:inline}.research-box{padding:12px}.research-copy{font-size:12.5px;margin-bottom:10px}.collapsible{margin-top:21px}.collapsible summary{font-size:16px;padding-bottom:7px}.actions{grid-template-columns:1fr;gap:6px}.action{min-height:34px;font-size:10px}.utility{margin-top:22px}.utility a{padding:15px;font-size:16px}.foot{font-size:11px;margin-top:22px}.rights-notice{margin-top:20px;padding:13px 14px;font-size:10.5px}.modal{padding:8px}.modal-panel{max-height:95vh;border-radius:15px}.modal-head{padding:12px}.modal-body{padding:11px 12px 14px}.modal-title{font-size:22px}.modal-sub{font-size:11.5px}.shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.cover-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.cover-copy{min-height:88px;padding:8px}.shelf-item{min-height:65px;padding:8px}.shelf-item strong{font-size:11.5px}.static-list{grid-template-columns:1fr}}
+@media(max-width:650px){
+  .wrap{width:min(94%,1000px);padding:17px 14px 42px}
+  .umbrella{font-size:9px;letter-spacing:1.6px;margin-bottom:6px}
+  .preview{font-size:10px;margin-bottom:7px}
+  h1{font-size:clamp(27px,9.5vw,42px);letter-spacing:1px}
+  .intro{font-size:15px;line-height:1.36;margin-top:9px}
+  .rule{font-size:12px;line-height:1.35;margin-bottom:18px}
+  .section-title{margin-top:22px;font-size:16px}
+  .grid,.utility{grid-template-columns:1fr;gap:9px}
+  .card{min-height:70px;padding:12px 14px;border-radius:14px}
+  .name{font-size:20px}
+  .note{font-size:12.5px;line-height:1.32}
+  .source{font-size:9px;margin-top:5px}
+  .feature{padding:12px;border-radius:16px}
+  .feature-head{margin-bottom:9px}
+  .feature-head strong{font-size:25px}
+  .feature-head span{font-size:12px}
+  .issue-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .issue{min-height:72px;padding:8px 5px;border-radius:10px}
+  .issue .num{font-size:9px}
+  .issue .date{font-size:12px}
+  .issue .read{font-size:9px;margin-top:4px}
+  .date-full{display:none}
+  .date-short{display:inline}
+  .research-box{padding:12px}
+  .research-copy{font-size:12.5px;margin-bottom:10px}
+  .collapsible{margin-top:21px}
+  .collapsible summary{font-size:16px;padding-bottom:7px}
+  .actions{grid-template-columns:1fr;gap:6px}
+  .action{min-height:34px;font-size:10px}
+  .utility{margin-top:22px}
+  .utility a{padding:15px;font-size:16px}
+  .foot{font-size:11px;margin-top:0}
+  .rights-notice{margin-top:20px;padding:13px 14px;font-size:10.5px}
+  .modal{padding:8px}
+  .modal-panel{max-height:95vh;border-radius:15px}
+  .modal-head{padding:12px}
+  .modal-body{padding:11px 12px 14px}
+  .modal-title{font-size:22px}
+  .modal-sub{font-size:11.5px}
+  .shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .cover-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .cover-copy{min-height:88px;padding:8px}
+  .shelf-item{min-height:65px;padding:8px}
+  .shelf-item strong{font-size:11.5px}
+  .static-list{grid-template-columns:1fr}
+}
+
+@media(max-width:620px){
+  .footer-row{align-items:flex-start;flex-direction:column}
+  .site-counter{text-align:left}
+  .site-counter img{margin-left:0}
+}
