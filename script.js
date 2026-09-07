@@ -146,6 +146,9 @@
     return mt ? mt[0] : 'UNDATED';
   }
 
+  // Avoid the common Android/JS timezone bug where YYYY-MM-01 is rendered as
+  // the previous month in US time zones.  We only need month/year on shelves,
+  // so parse those fields directly rather than converting midnight UTC.
   function formatYearMonth(year,month){
     const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const n=Number(month);
@@ -175,7 +178,7 @@
     if(n===1) return 'Oct/Nov 1987';
     if(n===2) return 'Dec 1987';
     if(n>=3 && n<=34){
-      const zero=(n-3);
+      const zero=(n-3); // Issue 3 = Jan 1988.
       const y=1988+Math.floor(zero/12);
       const mo=(zero%12)+1;
       return formatYearMonth(y,mo);
@@ -195,6 +198,10 @@
 
   function gamestIssueNum(doc){
     const t=rawTitle(doc).trim();
+    // The IA collection contains early duplicate uploads such as
+    // "Gamest 001 (May 1986)" and "Gamest 0001".  Treat the leading
+    // numbered GAMeST issue as the canonical issue key; non-numbered
+    // guides/mooks are not part of the regular magazine run.
     const m=t.match(/^GAMeST(?:\s+(?:Magazine|Issue|No\.?))?\s*[-#:]?\s*0*(\d{1,3})\b/i);
     return m ? Number(m[1]) : null;
   }
@@ -203,6 +210,7 @@
     const t=rawTitle(doc);
     const id=String(Array.isArray(doc.identifier)?doc.identifier[0]:(doc.identifier||''));
     let s=0;
+    // Prefer the descriptive early records that already carry month/year.
     if(/^GAMeST\s+0*\d{1,3}\s*\([^)]*(?:19|20)\d{2}[^)]*\)/i.test(t)) s+=12;
     if(/^GAMeST\s+0*\d{1,3}\b/i.test(t)) s+=5;
     if(/(?:19|20)\d{2}/.test(rawDate(doc))) s+=2;
@@ -221,7 +229,7 @@
     if(!m) return '';
     const y=Number(m[1]), mo=Number(m[2]);
     if(y<1985 || y>1989 || mo<1 || mo>12) return '';
-    if(y===1989 && mo>6) return '';
+    if(y===1989 && mo>6) return ''; // regular monthly Beep run ends June 1989.
     return String(y)+'-'+String(mo).padStart(2,'0');
   }
 
@@ -360,7 +368,7 @@
         const href = issueHref(ident,cfg);
         if(coverMode){
           const desc = (d ? d+' • ' : '') + (cfg.blurb || 'Magazine issue');
-          html += '<a class="cover-item" href="'+href+'" target="_blank" rel="noopener" title="'+esc(Array.isArray(doc.title)?doc.title[0]:(doc.title||ident))+'"><div class="cover-wrap"><img loading="lazy" src="https://archive.org/services/img/'+encodeURIComponent(ident)+'" alt="Cover of '+esc(title)+'"></div><div class="cover-copy"><strong>'+esc(title)+'</strong><span class="cover-desc">'+esc(desc)+'</span><span class="cover-read">READ ISSUE →</span></div></a>';
+          html += '<a class="cover-item" href="'+href+'" target="_blank" rel="noopener" title="'+esc(Array.isArray(doc.title)?doc.title[0]:(doc.title||ident))+'"><div class="cover-wrap"><img loading="eager" referrerpolicy="no-referrer" src="https://archive.org/download/'+encodeURIComponent(ident)+'/__ia_thumb.jpg" data-fallback="https://archive.org/services/img/'+encodeURIComponent(ident)+'" onerror="if(!this.dataset.fellback){this.dataset.fellback=1;this.src=this.dataset.fallback}else{this.onerror=null}" alt="Cover of '+esc(title)+'"></div><div class="cover-copy"><strong>'+esc(title)+'</strong><span class="cover-desc">'+esc(desc)+'</span><span class="cover-read">READ ISSUE →</span></div></a>';
         } else {
           html += '<a class="shelf-item" href="'+href+'" target="_blank" rel="noopener"><strong>'+esc(title)+'</strong><span>'+(d?esc(d)+' • ':'')+'READ →</span></a>';
         }
