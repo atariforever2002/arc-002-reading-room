@@ -1,0 +1,42 @@
+name: Point Starcade watch button to YouTube
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-starcade-youtube.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Replace Fandom link with Starcade YouTube channel
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '<a class="site-home" href="https://gameshows.fandom.com/wiki/Starcade/Video_Gallery" target="_blank" rel="noopener">BROWSE STARCADE VIDEO GALLERY →</a>'
+          new = '<a class="site-home" href="https://www.youtube.com/channel/UCKV-uKC9R7D6EkWKESlAM5A/videos" target="_blank" rel="noopener">WATCH STARCADE EPISODES ON YOUTUBE →</a>'
+          if old not in s:
+              raise SystemExit('Current Fandom link not found; refusing blind edit')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Commit repair
+        shell: bash
+        run: |
+          git config user.name 'atariforever2002'
+          git config user.email 'dde.biz@gmail.com'
+          git add index.html
+          git commit -m 'Point Starcade watch button to YouTube episode channel'
+          git push
