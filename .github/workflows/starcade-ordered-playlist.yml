@@ -1,0 +1,50 @@
+name: Add ordered Starcade playlist controls
+
+on:
+  push:
+    paths:
+      - '.github/workflows/starcade-ordered-playlist.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Upgrade Starcade controls
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '''    <a class="site-home" href="https://www.youtube.com/channel/UCKV-uKC9R7D6EkWKESlAM5A/videos" target="_blank" rel="noopener">WATCH STARCADE EPISODES ON YOUTUBE →</a>
+    <div class="article-actions">
+      <a class="article-link" href="https://www.starcade.tv/" target="_blank" rel="noopener">VISIT OFFICIAL STARCADE! SITE →</a>
+      <a class="article-link" href="https://starcade.tv/games/80scommercials.html" target="_blank" rel="noopener">80s COMMERCIALS →</a>'''
+          new = '''    <a class="site-home" href="https://www.youtube.com/watch?v=Xvve3aZjBao&amp;list=PLZsrmBT11LQAFL4_vQFjmQXczCcOGDZpH&amp;index=2" target="_blank" rel="noopener">START WITH EPISODE 001 →</a>
+    <div class="article-actions">
+      <a class="article-link" href="https://www.youtube.com/playlist?list=PLZsrmBT11LQAFL4_vQFjmQXczCcOGDZpH" target="_blank" rel="noopener">BROWSE EPISODES IN ORDER →</a>
+      <a class="article-link" href="https://www.starcade.tv/" target="_blank" rel="noopener">VISIT OFFICIAL STARCADE! SITE →</a>
+      <a class="article-link" href="https://starcade.tv/games/80scommercials.html" target="_blank" rel="noopener">80s COMMERCIALS →</a>'''
+          if old not in s:
+              raise SystemExit('Expected Starcade block not found; refusing to alter site.')
+          s = s.replace(old, new, 1)
+          s = s.replace('The original producers’ site preserves the show as well as games, contestants, commercials, hotlines, and other period material.', 'Start at Episode 001 in the chronological YouTube playlist and keep going, or browse the ordered episode shelf first. The original producers’ site remains linked for games, contestants, commercials, hotlines, and other period material.', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit update
+        shell: bash
+        run: |
+          git config user.name 'atariforever2002'
+          git config user.email 'dde.biz@gmail.com'
+          git add index.html
+          git commit -m 'Add chronological Starcade playlist controls'
+          git push
