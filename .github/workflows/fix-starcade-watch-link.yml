@@ -1,0 +1,45 @@
+name: Fix Starcade watch link
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-starcade-watch-link.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Replace dead episode link
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old_url = 'http://www.starcade.tv/starcade/games/shows.html'
+          old_label = 'WATCH CLASSIC STARCADE EPISODES →'
+          new_url = 'https://gameshows.fandom.com/wiki/Starcade/Video_Gallery'
+          new_label = 'BROWSE STARCADE VIDEO GALLERY →'
+          if old_url not in s:
+              raise SystemExit('Dead Starcade URL was not found')
+          s = s.replace(old_url, new_url, 1).replace(old_label, new_label, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit link repair
+        shell: bash
+        run: |
+          git config user.name 'atariforever2002'
+          git config user.email 'dde.biz@gmail.com'
+          git add index.html
+          git commit -m 'Repair Starcade video link'
+          git push
