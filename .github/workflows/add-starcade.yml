@@ -23,35 +23,17 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
+          import base64
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-
           if 'WATCH CLASSIC STARCADE EPISODES' in s:
               print('STARCADE section already present.')
               raise SystemExit(0)
-
           marker = '<div class="section-title">ARCADE HISTORY &amp; RESEARCH</div>'
           if marker not in s:
               raise SystemExit('Insertion marker not found; refusing to modify index.html')
-
-          block = '''<div class="section-title">WATCH / ARCADE TELEVISION</div>
-<div class="grid">
-<div class="card card-shell">
-  <span class="name">STARCADE!</span>
-  <span class="note">The wonderfully arcade-soaked 1982–84 game show: contestants answer videogame questions and compete on real arcade machines for prizes. The original producers’ site preserves the show as well as games, contestants, commercials, hotlines, and other period material.</span>
-  <span class="source">Official STARCADE! site • JM Production Co.</span>
-  <div class="site-actions">
-    <a class="site-home" href="http://www.starcade.tv/starcade/games/shows.html" target="_blank" rel="noopener">WATCH CLASSIC STARCADE EPISODES →</a>
-    <div class="article-actions">
-      <a class="article-link" href="https://www.starcade.tv/" target="_blank" rel="noopener">VISIT OFFICIAL STARCADE! SITE →</a>
-      <a class="article-link" href="https://starcade.tv/games/80scommercials.html" target="_blank" rel="noopener">80s COMMERCIALS →</a>
-    </div>
-  </div>
-</div>
-</div>
-
-'''
+          encoded = 'PGRpdiBjbGFzcz0ic2VjdGlvbi10aXRsZSI+V0FUQ0ggLyBBUkNBREUgVEVMRVZJU0lPTjwvZGl2Pgo8ZGl2IGNsYXNzPSJncmlkIj4KPGRpdiBjbGFzcz0iY2FyZCBjYXJkLXNoZWxsIj4KICA8c3BhbiBjbGFzcz0ibmFtZSI+U1RBUkNBREUhPC9zcGFuPgogIDxzcGFuIGNsYXNzPSJub3RlIj5UaGUgd29uZGVyZnVsbHkgYXJjYWRlLXNvYWtlZCAxOTgy4oCTODQgZ2FtZSBzaG93OiBjb250ZXN0YW50cyBhbnN3ZXIgdmlkZW9nYW1lIHF1ZXN0aW9ucyBhbmQgY29tcGV0ZSBvbiByZWFsIGFyY2FkZSBtYWNoaW5lcyBmb3IgcHJpemVzLiBUaGUgb3JpZ2luYWwgcHJvZHVjZXJz4oCZIHNpdGUgcHJlc2VydmVzIHRoZSBzaG93IGFzIHdlbGwgYXMgZ2FtZXMsIGNvbnRlc3RhbnRzLCBjb21tZXJjaWFscywgaG90bGluZXMsIGFuZCBvdGhlciBwZXJpb2QgbWF0ZXJpYWwuPC9zcGFuPgogIDxzcGFuIGNsYXNzPSJzb3VyY2UiPk9mZmljaWFsIFNUQVJDQURFISBzaXRlIOKAoiBKTSBQcm9kdWN0aW9uIENvLjwvc3Bhbj4KICA8ZGl2IGNsYXNzPSJzaXRlLWFjdGlvbnMiPgogICAgPGEgY2xhc3M9InNpdGUtaG9tZSIgaHJlZj0iaHR0cDovL3d3dy5zdGFyY2FkZS50di9zdGFyY2FkZS9nYW1lcy9zaG93cy5odG1sIiB0YXJnZXQ9Il9ibGFuayIgcmVsPSJub29wZW5lciI+V0FUQ0ggQ0xBU1NJQyBTVEFSQ0FERSBFUElTT0RFUyDihpI8L2E+CiAgICA8ZGl2IGNsYXNzPSJhcnRpY2xlLWFjdGlvbnMiPgogICAgICA8YSBjbGFzcz0iYXJ0aWNsZS1saW5rIiBocmVmPSJodHRwczovL3d3dy5zdGFyY2FkZS50di8iIHRhcmdldD0iX2JsYW5rIiByZWw9Im5vb3BlbmVyIj5WSVNJVCBPRkZJQ0lBTCBTVEFSQ0FERSEgU0lURSDihpI8L2E+CiAgICAgIDxhIGNsYXNzPSJhcnRpY2xlLWxpbmsiIGhyZWY9Imh0dHBzOi8vc3RhcmNhZGUudHYvZ2FtZXMvODBzY29tbWVyY2lhbHMuaHRtbCIgdGFyZ2V0PSJfYmxhbmsiIHJlbD0ibm9vcGVuZXIiPjgwcyBDT01NRVJDSUFMUyDihpI8L2E+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+CjwvZGl2PgoK'
+          block = base64.b64decode(encoded).decode('utf-8')
           p.write_text(s.replace(marker, block + marker, 1), encoding='utf-8')
           print('STARCADE section added.')
           PY
