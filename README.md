@@ -1,6 +1,6 @@
 # ARC-002 — The Reading Room
 
-**Arcade Obscura — The Footnotes of Arcade History**
+**Arcade Side B — The Overlooked Side of Arcade History**
 
 The Reading Room is a curated arcade-periodicals library focused on historically useful magazines, trade publications, retrospective reading, and direct issue browsing.
 
