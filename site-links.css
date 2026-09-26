@@ -6,5 +6,5 @@
 @media(max-width:650px){.site-actions{margin-top:9px}.site-home{min-height:32px;font-size:9.5px}.article-link{min-height:27px;font-size:8.8px;flex:1 1 130px}}
 
 /* Keep the main-site return separate from article action buttons. */
-.site-actions.site-return{align-items:flex-end;margin:0 0 24px}
+.site-actions.site-return{align-items:center;margin:0 0 24px}
 .site-return .site-home{display:inline-flex;max-width:100%;min-height:38px;padding:9px 14px;font-size:12px}
