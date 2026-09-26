@@ -1,6 +1,6 @@
 (function(){
   const mq = window.matchMedia('(max-width: 650px)');
-  const ids = ['rare','international'];
+  const ids = ['rare'];
   function setDetailsForScreen(){
     ids.forEach(function(id){
       const el = document.getElementById(id);
@@ -32,36 +32,6 @@
       label: 'The Games Machine',
       blurb: 'UK late-1980s games magazine issue',
       filterMode: 'tgm34'
-    },
-    gamest: {
-      title: 'GAMeST',
-      sub: 'Magazine-rack view of the Japanese arcade-specialist run, using real Internet Archive issue-cover thumbnails and preserving the direct issue links.',
-      query: 'collection:gamestmagazine AND mediatype:texts',
-      raw: 'https://archive.org/details/gamestmagazine?sort=date',
-      layout: 'covers',
-      label: 'GAMeST',
-      blurb: 'Japanese arcade-specialist magazine issue',
-      filterMode: 'gamestDedupe'
-    },
-    arcadia: {
-      title: 'Arcadia',
-      sub: 'Magazine-rack view of the later Japanese arcade-specialist run, using real Internet Archive issue-cover thumbnails and preserving the direct issue links.',
-      query: 'collection:arcadia-magazine AND mediatype:texts',
-      raw: 'https://archive.org/details/arcadia-magazine?sort=date',
-      layout: 'covers',
-      label: 'Arcadia',
-      blurb: 'Japanese arcade-specialist magazine issue'
-    },
-    beep: {
-      title: 'Beep!',
-      sub: 'Magazine-rack view of the cleaned 45-issue Beep! run, using real Internet Archive issue-cover thumbnails while preserving deduplication, normalized dates, and the embedded-reader route.',
-      query: 'collection:videogamemagazinesmisc AND mediatype:texts AND (title:Beep* OR identifier:beep*)',
-      raw: 'https://archive.org/details/videogamemagazinesmisc?query=beep&sort=date',
-      layout: 'covers',
-      label: 'Beep!',
-      blurb: 'Japanese videogame magazine issue',
-      viewer: 'embed',
-      filterMode: 'beepDedupe'
     }
   };
 
