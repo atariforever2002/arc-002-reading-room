@@ -1,6 +1,6 @@
 (function(){
   const mq = window.matchMedia('(max-width: 650px)');
-  const ids = ['rare','international'];
+  const ids = ['rare'];
   function setDetailsForScreen(){
     ids.forEach(function(id){
       const el = document.getElementById(id);
@@ -32,36 +32,6 @@
       label: 'The Games Machine',
       blurb: 'UK late-1980s games magazine issue',
       filterMode: 'tgm34'
-    },
-    gamest: {
-      title: 'GAMeST',
-      sub: 'Magazine-rack view of the Japanese arcade-specialist run, using real Internet Archive issue-cover thumbnails and preserving the direct issue links.',
-      query: 'collection:gamestmagazine AND mediatype:texts',
-      raw: 'https://archive.org/details/gamestmagazine?sort=date',
-      layout: 'covers',
-      label: 'GAMeST',
-      blurb: 'Japanese arcade-specialist magazine issue',
-      filterMode: 'gamestDedupe'
-    },
-    arcadia: {
-      title: 'Arcadia',
-      sub: 'Magazine-rack view of the later Japanese arcade-specialist run, using real Internet Archive issue-cover thumbnails and preserving the direct issue links.',
-      query: 'collection:arcadia-magazine AND mediatype:texts',
-      raw: 'https://archive.org/details/arcadia-magazine?sort=date',
-      layout: 'covers',
-      label: 'Arcadia',
-      blurb: 'Japanese arcade-specialist magazine issue'
-    },
-    beep: {
-      title: 'Beep!',
-      sub: 'Magazine-rack view of the cleaned 45-issue Beep! run, using real Internet Archive issue-cover thumbnails while preserving deduplication, normalized dates, and the embedded-reader route.',
-      query: 'collection:videogamemagazinesmisc AND mediatype:texts AND (title:Beep* OR identifier:beep*)',
-      raw: 'https://archive.org/details/videogamemagazinesmisc?query=beep&sort=date',
-      layout: 'covers',
-      label: 'Beep!',
-      blurb: 'Japanese videogame magazine issue',
-      viewer: 'embed',
-      filterMode: 'beepDedupe'
     }
   };
 
@@ -196,53 +166,6 @@
     return s;
   }
 
-  function gamestIssueNum(doc){
-    const t=rawTitle(doc).trim();
-    // The IA collection contains early duplicate uploads such as
-    // "Gamest 001 (May 1986)" and "Gamest 0001".  Treat the leading
-    // numbered GAMeST issue as the canonical issue key; non-numbered
-    // guides/mooks are not part of the regular magazine run.
-    const m=t.match(/^GAMeST(?:\s+(?:Magazine|Issue|No\.?))?\s*[-#:]?\s*0*(\d{1,3})\b/i);
-    return m ? Number(m[1]) : null;
-  }
-
-  function gamestCandidateScore(doc){
-    const t=rawTitle(doc);
-    const id=String(Array.isArray(doc.identifier)?doc.identifier[0]:(doc.identifier||''));
-    let s=0;
-    // Prefer the descriptive early records that already carry month/year.
-    if(/^GAMeST\s+0*\d{1,3}\s*\([^)]*(?:19|20)\d{2}[^)]*\)/i.test(t)) s+=12;
-    if(/^GAMeST\s+0*\d{1,3}\b/i.test(t)) s+=5;
-    if(/(?:19|20)\d{2}/.test(rawDate(doc))) s+=2;
-    if(/[a-z]+[-_ ](?:19|20)\d{2}/i.test(id)) s+=2;
-    if(/\b(guide|mook|special)\b/i.test(t)) s-=20;
-    return s;
-  }
-
-  function beepKey(doc){
-    const t=rawTitle(doc);
-    let m=t.match(/\b((?:19)\d{2})[-_ ]([01]?\d)(?:[-_ ]\d{1,2})?\b/);
-    if(!m){
-      const id=String(Array.isArray(doc.identifier)?doc.identifier[0]:(doc.identifier||''));
-      m=id.match(/\b((?:19)\d{2})[-_ ]?([01]\d)\b/);
-    }
-    if(!m) return '';
-    const y=Number(m[1]), mo=Number(m[2]);
-    if(y<1985 || y>1989 || mo<1 || mo>12) return '';
-    if(y===1989 && mo>6) return ''; // regular monthly Beep run ends June 1989.
-    return String(y)+'-'+String(mo).padStart(2,'0');
-  }
-
-  function beepCandidateScore(doc){
-    const t=rawTitle(doc);
-    let s=0;
-    if(/^Beep\s*-\s*19\d{2}-\d{2}-\d{2}/i.test(t)) s+=8;
-    if(/Number\s*\d+/i.test(t)) s+=3;
-    if(/Volume\s*\d+/i.test(t)) s+=2;
-    if(/600\s*dpi/i.test(t)) s+=1;
-    return s;
-  }
-
   function postprocessDocs(docs,cfg){
     if(!cfg || !cfg.filterMode) return docs.slice();
 
@@ -262,39 +185,6 @@
         const ym=d._displayDate.match(/(19|20)\d{2}/);
         d._displayYear=ym?ym[0]:'';
         d._cleanTitle='The Games Machine — Issue '+String(n).padStart(2,'0');
-        return d;
-      });
-    }
-
-    if(cfg.filterMode==='gamestDedupe'){
-      const best={};
-      docs.forEach(function(doc){
-        const n=gamestIssueNum(doc);
-        if(!n) return;
-        if(!best[n] || gamestCandidateScore(doc)>gamestCandidateScore(best[n])) best[n]=doc;
-      });
-      return Object.keys(best).map(Number).sort(function(a,b){return a-b;}).map(function(n){
-        const d=best[n];
-        d._issueNum=n;
-        return d;
-      });
-    }
-
-    if(cfg.filterMode==='beepDedupe'){
-      const best={};
-      docs.forEach(function(doc){
-        const key=beepKey(doc);
-        if(!key) return;
-        if(!best[key] || beepCandidateScore(doc)>beepCandidateScore(best[key])) best[key]=doc;
-      });
-      return Object.keys(best).sort().map(function(key){
-        const d=best[key];
-        const parts=key.split('-');
-        d._displayDate=formatYearMonth(parts[0],parts[1]);
-        d._displayYear=parts[0];
-        const n=issueNumFromTitle(d);
-        d._issueNum=n;
-        d._cleanTitle=n ? ('Beep! — Issue '+n) : ('Beep! — '+d._displayDate);
         return d;
       });
     }
