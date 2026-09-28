@@ -156,3 +156,11 @@ button.card{cursor:pointer}
 @media(max-width:430px){
   .room-nav{grid-template-columns:repeat(3,1fr)}
 }
+
+
+/* Rebalance the Arcade History research section: one wide deep-dive desk, then two supporting desks. */
+.research-history-grid{align-items:start}
+.research-history-grid>.research-historians-card{grid-column:1/-1}
+@media(max-width:650px){
+  .research-history-grid>.research-historians-card{grid-column:auto}
+}
