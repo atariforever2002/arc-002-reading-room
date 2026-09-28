@@ -158,7 +158,6 @@ button.card{cursor:pointer}
 
 
 /* Rebalance the Arcade History research section: one wide deep-dive desk, then two supporting desks. */
-.research-history-grid{align-items:start}
 .research-history-grid>.research-historians-card{grid-column:1/-1}
 @media(max-width:650px){
   .research-history-grid>.research-historians-card{grid-column:auto}
@@ -184,4 +183,87 @@ button.card{cursor:pointer}
 @media(max-width:650px){
   .card-shell .actions{margin-top:9px}
   .card-shell .action{flex-basis:100%;width:100%}
+}
+
+
+/* Symmetrical Arcade History research layout. */
+.research-history-grid{
+  align-items:stretch;
+}
+.research-history-grid>.card{
+  height:100%;
+}
+
+/* 15 historian/deep-dive links = a perfect 3 x 5 matrix. */
+.research-historians-card{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;
+  align-content:start;
+}
+.research-historians-card>.name,
+.research-historians-card>.note,
+.research-historians-card>.source{
+  grid-column:1/-1;
+}
+.research-historians-card>.site-actions,
+.research-historians-card>.article-actions{
+  display:contents;
+}
+.research-historians-card .site-home,
+.research-historians-card .article-link{
+  width:100%;
+  min-width:0;
+  height:42px;
+  min-height:42px;
+  margin:0;
+  flex:none;
+}
+
+/* Developer desk: four links in a balanced 2 x 2 block. */
+.research-developer-card .article-actions{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:6px;
+  margin-top:auto;
+  padding-top:11px;
+}
+.research-developer-card .article-link{
+  width:100%;
+  min-width:0;
+  height:42px;
+  min-height:42px;
+  margin:0;
+  flex:none;
+}
+
+/* System 16: same visual button size, centered in its matching-height card. */
+.research-system-card .actions{
+  margin-top:auto;
+  padding-top:11px;
+  justify-content:center;
+}
+.research-system-card .action{
+  width:180px;
+  flex:0 0 180px;
+  height:42px;
+  min-height:42px;
+}
+
+@media(max-width:650px){
+  .research-historians-card{
+    grid-template-columns:1fr;
+  }
+  .research-developer-card .article-actions{
+    grid-template-columns:1fr;
+  }
+  .research-historians-card .site-home,
+  .research-historians-card .article-link,
+  .research-developer-card .article-link,
+  .research-system-card .action{
+    width:100%;
+    flex-basis:100%;
+    height:auto;
+    min-height:36px;
+  }
 }
