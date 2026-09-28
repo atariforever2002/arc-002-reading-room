@@ -13,7 +13,6 @@ h1{margin:0;text-align:center;color:#ffd166;font-size:clamp(30px,5vw,54px);lette
 .section-title{margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid rgba(255,255,255,.18);color:#9ecae1;font-size:17px;font-weight:800;letter-spacing:.9px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .grid>.card:only-child{grid-column:1/-1}
-.action:only-child{grid-column:1/-1}
 .card{display:flex;flex-direction:column;justify-content:center;min-height:82px;padding:14px 16px;border:1px solid rgba(255,255,255,.17);border-radius:15px;background:rgba(255,255,255,.072);color:white;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.2);text-align:left;font:inherit;width:100%}
 button.card{cursor:pointer}
 .name{font-size:clamp(18px,2.3vw,24px);font-weight:800;line-height:1.12}
@@ -163,4 +162,26 @@ button.card{cursor:pointer}
 .research-history-grid>.research-historians-card{grid-column:1/-1}
 @media(max-width:650px){
   .research-history-grid>.research-historians-card{grid-column:auto}
+}
+
+
+/* Uniform Reading Room action buttons.
+   Desktop buttons stay compact and equal-sized instead of stretching across cards. */
+.card-shell .actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:11px;
+  justify-content:flex-start;
+}
+.card-shell .action{
+  flex:0 0 180px;
+  width:180px;
+  min-height:38px;
+  padding:6px 8px;
+  box-sizing:border-box;
+}
+@media(max-width:650px){
+  .card-shell .actions{margin-top:9px}
+  .card-shell .action{flex-basis:100%;width:100%}
 }
