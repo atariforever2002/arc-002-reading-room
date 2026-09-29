@@ -6,6 +6,24 @@
 <title>The Reading Room | Arcade Side B</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="site-links.css">
+
+<style id="room-search-styles">
+.room-search{max-width:760px;margin:-10px auto 24px;padding:13px 15px;border:1px solid rgba(255,209,102,.48);border-radius:14px;background:rgba(255,255,255,.055);box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.room-search label{display:block;margin-bottom:6px;color:#ffd166;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase}
+.room-search-row{display:flex;gap:8px}
+.room-search input{flex:1;min-width:0;padding:10px 12px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:#08111a;color:#fff;font:14px Arial,sans-serif}
+.room-search button{padding:9px 14px;border:1px solid #ffd166;border-radius:9px;background:#ffd166;color:#101820;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer}
+.room-search-hint{margin:6px 0 0;color:#a9c3d4;font-size:11px;line-height:1.4}
+.room-search-results{margin-top:10px;padding-top:5px;border-top:1px solid rgba(255,255,255,.14)}
+.room-search-results[hidden]{display:none}
+.room-result{display:block;padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.1);color:white;text-decoration:none}
+.room-result:hover,.room-result:focus{background:rgba(255,209,102,.07)}
+.room-result strong{display:block;color:#fff;font-size:15px}
+.room-result small{display:block;color:#ffd166;font-size:9px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.room-result span{display:block;margin-top:2px;color:#b1c4d1;font-size:12px;line-height:1.4}
+.room-search-empty{padding:9px 4px;color:#cbdce7;font-size:12px}
+@media(max-width:560px){.room-search-row{align-items:stretch}.room-search button{padding:8px 10px}}
+</style>
 </head>
 <body>
 <main class="wrap">
@@ -26,6 +44,12 @@
   <a href="#play">PLAY</a>
   <a href="#research">RESEARCH</a>
 </nav>
+<form class="room-search" id="room-search" role="search">
+  <label for="room-search-input">Search the Reading Room</label>
+  <div class="room-search-row"><input id="room-search-input" name="q" type="search" placeholder="Magazines, games, interviews, research…" autocomplete="off"><button type="submit">Search</button></div>
+  <p class="room-search-hint">Search the curated resources and issue links on this page. Search stays in this browser.</p>
+  <div class="room-search-results" id="room-search-results" aria-live="polite" hidden></div>
+</form>
 
 <div class="section-title">FEATURED COMPLETE RUN</div>
 <section class="feature">
@@ -285,5 +309,18 @@
 </div>
 
 <script src="script.js"></script>
+
+<script id="room-search-script">
+(function(){
+  const form=document.getElementById('room-search'),input=document.getElementById('room-search-input'),out=document.getElementById('room-search-results');
+  if(!form||!input||!out)return;
+  const clean=s=>(s||'').replace(/\s+/g,' ').trim();
+  const headings=[...document.querySelectorAll('.section-title')],records=[];
+  function categoryFor(el){let category='Reading Room';for(const h of headings){if(h.compareDocumentPosition(el)&Node.DOCUMENT_POSITION_FOLLOWING)category=clean(h.innerText||h.textContent)}const feature=el.closest('.feature');if(feature){const name=feature.querySelector('.feature-head strong')?.textContent;if(name)category=clean(name)+' • '+category}return category}
+  document.querySelectorAll('main .card,main .issue').forEach((el,i)=>{if(!el.id)el.id='room-search-item-'+(i+1);const title=el.querySelector('.name,.num')?.textContent||el.querySelector('strong')?.textContent||clean(el.innerText).slice(0,100);const body=clean(el.innerText||el.textContent);const category=categoryFor(el);records.push({el,title:clean(title),body,category,hay:(clean(title)+' '+body+' '+category).toLowerCase()})});
+  function render(){const terms=clean(input.value).toLowerCase().split(/\s+/).filter(Boolean);out.replaceChildren();if(!terms.length){out.hidden=true;return}const found=records.map(r=>({r,score:terms.reduce((n,t)=>n+(r.hay.includes(t)?1:0),0)+(r.title.toLowerCase().includes(terms.join(' '))?2:0)})).filter(x=>x.score===terms.length||x.r.hay.includes(terms.join(' '))).sort((a,b)=>b.score-a.score||a.r.title.localeCompare(b.r.title)).slice(0,15);out.hidden=false;if(!found.length){const p=document.createElement('p');p.className='room-search-empty';p.textContent='No matches found. Try another title, magazine, person, or topic.';out.append(p);return}found.forEach(({r})=>{const a=document.createElement('a');a.className='room-result';a.href='#'+r.el.id;const cat=document.createElement('small'),title=document.createElement('strong'),detail=document.createElement('span');cat.textContent=r.category;title.textContent=r.title;detail.textContent=r.body.slice(0,190)+(r.body.length>190?'…':'');a.append(cat,title,detail);out.append(a)})}
+  form.addEventListener('submit',e=>{e.preventDefault();render()});input.addEventListener('input',render);
+})();
+</script>
 </body>
 </html>
