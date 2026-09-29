@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://atariforever2002.github.io/arc-002-reading-room/sitemap.xml
